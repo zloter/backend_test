@@ -25,6 +25,8 @@ class SequenceController extends AbstractController
     }
 
     /**
+     * Show form for sequence
+     *
      * @return Response
      */
     public function formAction() {

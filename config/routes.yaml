@@ -1,3 +1,9 @@
-index:
+sequence_form:
     path: /
     controller: App\Controller\SequenceController::formAction
+    methods: get
+
+sequence_result:
+    path: /
+    controller: App\Controller\SequenceController::resultAction
+    methods: post

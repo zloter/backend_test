@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form action="/" method="post">
+
+        <label>Długość ciągu</label>
+        <div class="form-group" id="inputs">
+                <input type="text" class="form-control" placeholder="Długość ciągu" name="input[]">
+        </div>
+
+        <button id="add_button" type="button" class="btn btn-success">Dodaj pozycję</button>
+        <button type="submit" class="btn btn-primary">Oblicz!</button>
+        <small class="form-text text-muted">Możesz dodać do 10 pozycji</small>
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var container = document.getElementById('inputs');
+        var input = container.firstElementChild.cloneNode();
+
+        document.getElementById('add_button').addEventListener('click', () => {
+            if (container.childElementCount < 10) {
+                container.appendChild(input.cloneNode());
+            } else {
+                console.log("Można dodać do dziesięciu elementów!");
+            }
+        });
+
+    </script>
+
+{% endblock %}

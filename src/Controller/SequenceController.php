@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use App\Services\SequenceService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SequenceController extends AbstractController
@@ -21,7 +23,6 @@ class SequenceController extends AbstractController
     public function __construct()
     {
         $this->sequenceService = new SequenceService();
-        parent::__construct();
     }
 
     /**
@@ -30,6 +31,32 @@ class SequenceController extends AbstractController
      * @return Response
      */
     public function formAction() {
-        return new Response('Response');
+        return $this->render('sequence/form.html.twig', [
+        ]);;
+    }
+
+
+    public function resultAction(Request $request) {
+        $input = $request->request->get('input');
+        $results = [];
+        $errors = [];
+        // TODO:  improve validation
+        foreach($input as $item) {
+            if (!is_numeric($item) || $item === 0) {
+                array_push($errors, 'Długość ciągu musi być liczbą całkowitą dodatnią');
+            }
+            break;
+        }
+
+        if (empty($errors)) {
+            foreach($input as $item) {
+                $result = $this->sequenceService->findSequenceMax($item);
+                array_push($results, $result);
+            }
+        }
+        return $this->render('sequence/result.html.twig', [
+            'results' => $results,
+            'errors' => $errors
+        ]);;
     }
 }

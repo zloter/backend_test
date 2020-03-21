@@ -27,7 +27,10 @@ class SequenceServiceTest extends TestCase
     public function sequenceMaxProvider() {
         return [
             [5, 3],
-            [10, 4]
+            [10, 4],
+            [0, 0],
+            [1, 1],
+            [99999, 2584]
         ];
     }
 }

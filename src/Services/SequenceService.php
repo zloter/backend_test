@@ -10,7 +10,7 @@ class SequenceService
      * @param int $number Length of sequence
      * @return array Full sequence
      */
-    private function createSequence(int $number) : array {
+    public function createSequence(int $number) : array {
         return [];
     }
 

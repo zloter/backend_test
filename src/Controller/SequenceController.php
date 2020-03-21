@@ -4,9 +4,8 @@
 namespace App\Controller;
 
 
-use App\Services\SequenceService;
+use App\Service\SequenceService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 

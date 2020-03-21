@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Tests\Services;
+namespace App\Tests\Service;
 
 
-use App\Services\SequenceService;
+use App\Service\SequenceService;
 use PHPUnit\Framework\TestCase;
 
 class SequenceServiceTest extends TestCase

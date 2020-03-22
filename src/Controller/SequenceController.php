@@ -41,7 +41,7 @@ class SequenceController extends AbstractController
         $errors = [];
         // TODO:  improve validation
         foreach($input as $item) {
-            if (!is_numeric($item) || $item === 0) {
+            if (!is_numeric($item) || $item == 0) {
                 array_push($errors, 'Długość ciągu musi być liczbą całkowitą dodatnią');
             }
             break;

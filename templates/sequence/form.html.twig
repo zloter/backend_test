@@ -13,20 +13,3 @@
         <small class="form-text text-muted">Możesz dodać do 10 pozycji</small>
     </form>
 {% endblock %}
-
-{% block javascripts %}
-    <script>
-        var container = document.getElementById('inputs');
-        var input = container.firstElementChild.cloneNode();
-
-        document.getElementById('add_button').addEventListener('click', () => {
-            if (container.childElementCount < 10) {
-                container.appendChild(input.cloneNode());
-            } else {
-                console.log("Można dodać do dziesięciu elementów!");
-            }
-        });
-
-    </script>
-
-{% endblock %}

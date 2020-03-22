@@ -1,1 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
+
+.container--form {
+  background-color: white;
+}
+.inactive {
+  pointer-events: none;
+  opacity: 0.7;
+}

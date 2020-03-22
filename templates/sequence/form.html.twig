@@ -1,15 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h1 class="bd-title">
+        Sequence form
+    </h1>
+    <p class="bd-lead">
+        Calculating max value for given sequence length
+    </p>
+
+    <div id="app" v-bind:class="{ inactive: !active }">
+
+        <div class="row">
+            <div class="col-9">
+                <label>Sequence length</label>
+            </div>
+            <div class="col-3">
+                <label>Results:</label>
+            </div>
+        </div>
+        <div class="row" v-for="(item, index) in input">
+            <div class="form-group col-9" >
+                <div class="input-group ">
+                    <input type="text" class="form-control" placeholder="Sequence length" name="input[]" v-model="input[index]">
+                    <div v-if="input.length !== 1" class="input-group-append" v-on:click="removeInput(index)">
+                        <span class="btn  btn-outline-danger">X</span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group col-3">
+                <p>[[ output[index] || '' ]]</p>
+            </div>
+
+        </div>
+        <button v-on:click="addInput()" type="button" class="btn btn-outline-success">Add position</button>
+        <button v-on:click="calculate()" type="button" class="btn btn-outline-primary">Calculate!</button>
+        <small class="form-text text-muted">You can add up to 10 positions</small>
+
+    </div>
     <form action="/" method="post">
 
-        <label>Długość ciągu</label>
-        <div class="form-group" id="inputs">
-                <input type="text" class="form-control" placeholder="Długość ciągu" name="input[]">
-        </div>
 
-        <button id="add_button" type="button" class="btn btn-success">Dodaj pozycję</button>
-        <button type="submit" class="btn btn-primary">Oblicz!</button>
-        <small class="form-text text-muted">Możesz dodać do 10 pozycji</small>
     </form>
 {% endblock %}

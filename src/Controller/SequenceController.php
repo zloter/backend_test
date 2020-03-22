@@ -19,8 +19,7 @@ class SequenceController extends AbstractController
     /**
      * SequenceController constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->sequenceService = new SequenceService();
     }
 
@@ -39,12 +38,14 @@ class SequenceController extends AbstractController
         $input = $request->request->get('input');
         $results = [];
         $errors = [];
+        $status = 200;
         // TODO:  improve validation
         foreach($input as $item) {
             if (!is_numeric($item) || $item == 0) {
                 array_push($errors, 'Długość ciągu musi być liczbą całkowitą dodatnią');
+                $status = 422;
+                break;
             }
-            break;
         }
 
         if (empty($errors)) {
@@ -53,9 +54,9 @@ class SequenceController extends AbstractController
                 array_push($results, $result);
             }
         }
-        return $this->render('sequence/result.html.twig', [
+        return $this->json([
             'results' => $results,
-            'errors' => $errors
-        ]);;
+            'errors' =>$errors
+        ], $status);
     }
 }

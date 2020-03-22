@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Command;
-
 
 use App\Service\SequenceService;
 use Symfony\Component\Console\Command\Command;
@@ -25,14 +23,12 @@ class SequenceCommand extends Command
      * SequenceCommand constructor.
      * @param string|null $name
      */
-    public function __construct(string $name = null)
-    {
+    public function __construct(string $name = null) {
         $this->sequenceService = new SequenceService();
         parent::__construct($name);
     }
 
-    protected function configure()
-    {
+    protected function configure() {
         $this
             ->setDescription('Finding out the biggest element in sequence')
             ->setHelp('It takes up to 10 numbers; accept standard input or list of arguments')
@@ -45,8 +41,7 @@ class SequenceCommand extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
+    protected function execute(InputInterface $input, OutputInterface $output) {
         $lengths = $this->parseStdin();
         empty($lengths) && $lengths = $input->getArgument('lengths');
         empty($lengths) && new InvalidArgumentException("There must be at least one length");
@@ -57,8 +52,7 @@ class SequenceCommand extends Command
         return 0;
     }
 
-    protected function parseStdin()
-    {
+    protected function parseStdin() {
         stream_set_blocking(STDIN, 0);
         $input = stream_get_contents(STDIN);
         $input = explode("\n", $input);

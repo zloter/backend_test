@@ -35,10 +35,12 @@ new Vue({
         removeInput: function (item) {
             this.input.splice(item, 1);
             this.output[item] && this.output.splice(item, 1);
+            this.errors = [];
         },
         calculate: function () {
             this.output = [];
             this.active = false;
+            this.errors = [];
             let data = new FormData();
             this.input.forEach((item) => {
                 data.append('input[]', item)

@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Service\SequenceService;
+use App\Service\ValidationService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,11 +21,17 @@ class SequenceCommand extends Command
     private $sequenceService;
 
     /**
+     * @var ValidationService
+     */
+    private $validationService;
+
+    /**
      * SequenceCommand constructor.
      * @param string|null $name
      */
     public function __construct(string $name = null) {
         $this->sequenceService = new SequenceService();
+        $this->validationService = new ValidationService();
         parent::__construct($name);
     }
 
@@ -63,15 +70,11 @@ class SequenceCommand extends Command
     }
 
     protected function validate(array $input):void {
-
-        // TODO:  improve validation - put it into one class
-        if (sizeof($input) >= 10) {
-            throw new \InvalidArgumentException("There cannot be more than 10 lengths");
-        }
-        foreach($input as $item) {
-            if (!is_numeric($item) || $item == 0) {
-                throw new InvalidArgumentException('Sequence length MUST be positive integer');
-            }
+        $errors = $this->validationService->validateAmount($input);
+        empty($errors) && $errors = $this->validationService->validate($input);
+        if (count($errors) > 0) {
+            $errorsString = implode("\n", $errors);
+            throw new \InvalidArgumentException($errorsString);
         }
     }
 }
